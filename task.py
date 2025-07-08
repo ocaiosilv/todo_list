@@ -6,6 +6,9 @@ class TaskManager:
 
     def taskDict(self):
         return self._tasks
+    
+    def clearDict(self):
+        self._tasks.clear()
         
     def addTask(self, task):
         if task in self._tasks:

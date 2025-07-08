@@ -1,6 +1,8 @@
 from task import TaskManager
 from ui import menu, taskselector, statusType
+from storage import loadToDOList, saveToDoList
 import os
+
 def main():
     os.system('cls' if os.name == 'nt' else 'clear')
     tasks = TaskManager()
@@ -17,6 +19,7 @@ def main():
         os.system('cls' if os.name == 'nt' else 'clear')
         taskDict = tasks.taskDict()
         res = menu(taskDict)
+        name = None
         match res:
             case 1:
                 print("Please, type the task content: ")
@@ -28,6 +31,12 @@ def main():
             case 4:
                 tasks.editTask(taskselector(taskDict))
             case 5:
+                saveToDoList(tasks.taskDict(), name)
+            case 6:
+                tasks.taskDict, name  = loadToDOList()
+            case 7:
+                tasks.clearDict()
+            case 0:
                 print("Stopping...")
                 break
             

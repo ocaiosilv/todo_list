@@ -45,12 +45,15 @@ def menu(taskDict): ##The basic menu
     print("2 - Update Task status")
     print("3 - Remove a Task")
     print("4 - Edit a Task")
-    print("5 - Stop the program")
+    print("5 - Save the list")
+    print("6 - Load a list")
+    print("7 - Start a new list")
+    print("0 - Stop the program")
     while True:
         a = input(":  ")
         try:
             intA = int(a)
-            if intA in [1,2,3,4,5]:
+            if intA in [1,2,3,4,5,6,7,8,0]:
                 break
             else:
                print("Please, type the number of one of the options")
