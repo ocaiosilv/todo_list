@@ -4,6 +4,10 @@ class TaskManager:
         self._wipTask = None
         self._wip = False
 
+    def loadTasks(self, toLoad):
+        self._tasks.clear
+        self._tasks = toLoad
+
     def taskDict(self):
         return self._tasks
     

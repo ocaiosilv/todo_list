@@ -6,7 +6,7 @@ import os
 def main():
     os.system('cls' if os.name == 'nt' else 'clear')
     tasks = TaskManager()
-    print("Your's to do List")
+    print("Your toDo List")
     print("_____")
     print("empty")
     print("_____")
@@ -31,9 +31,10 @@ def main():
             case 4:
                 tasks.editTask(taskselector(taskDict))
             case 5:
-                saveToDoList(tasks.taskDict(), name)
+                saveToDoList(taskDict, name)
             case 6:
-                tasks.taskDict, name  = loadToDOList()
+                loadedList, name  = loadToDOList()
+                tasks.loadTasks(loadedList)
             case 7:
                 tasks.clearDict()
             case 0:
