@@ -14,12 +14,12 @@ def main():
     print("Please start with adding a task:")
     tasks.addTask(str(input(":  ")))
     print("Very Well")
+    name = None
 
     while True:
         os.system('cls' if os.name == 'nt' else 'clear')
         taskDict = tasks.taskDict()
         res = menu(taskDict)
-        name = None
         match res:
             case 1:
                 print("Please, type the task content: ")
@@ -31,13 +31,18 @@ def main():
             case 4:
                 tasks.editTask(taskselector(taskDict))
             case 5:
-                saveToDoList(taskDict, name)
+                name = saveToDoList(taskDict, name)
             case 6:
-                loadedList, name  = loadToDOList()
-                tasks.loadTasks(loadedList)
+                loadedList, name_loaded  = loadToDOList()
+                if loadedList is not None:
+                    tasks.loadTasks(loadedList)
+                    name = name_loaded
+                else:
+                    pass
             case 7:
                 tasks.clearDict()
-            case 0:
+                name = None
+            case 8:
                 print("Stopping...")
                 break
             

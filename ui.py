@@ -1,4 +1,5 @@
 import os
+from InquirerPy import prompt
 
 def emptyDict(taskDict):
     if not taskDict:
@@ -8,26 +9,27 @@ def emptyDict(taskDict):
         return True
     
 def taskselector(taskDict):
+    choices = []
     if emptyDict(taskDict) == True:
         base = "_" * (len(max(taskDict, key=len)))
         print(base)
         for k, i in enumerate(taskDict):
             print(k+1,"° - ",i," -> ", taskDict[i])
+            choices.append(i)
         print(base)
-        while True:
-            print("Please the number of the task: ")
-            a = input(":  ")
-            try:
-                intA = int(a)
-                for k,i in enumerate(taskDict):
-                    if  intA == k+1:
-                        return i
-                print("Please, an valid number")
-            except ValueError:
-                print("Please, type an number")
+        options = [
+        {
+            "type": "list",
+            "message": "Please select one option:",
+            "choices": choices,
+        }
+        ]
+        result = prompt(options)
+        choice = result[0]
+        return (choice)
     else:
         return None
-
+        
 def menu(taskDict): ##The basic menu
     print("Your toDo List")
     if taskDict:
@@ -40,47 +42,29 @@ def menu(taskDict): ##The basic menu
         print("_____")
         print("empty")
         print("_____")
-    print("Please choose an option:")
-    print("1 - Add a new Task")
-    print("2 - Update Task status")
-    print("3 - Remove a Task")
-    print("4 - Edit a Task")
-    print("5 - Save the list")
-    print("6 - Load a list")
-    print("7 - Start a new list")
-    print("0 - Stop the program")
-    while True:
-        a = input(":  ")
-        try:
-            intA = int(a)
-            if intA in [1,2,3,4,5,6,7,8,0]:
-                break
-            else:
-               print("Please, type the number of one of the options")
-        except ValueError: ## type error
-            print("Please, type a number")
-    return intA
+    options = [
+        {
+            "type": "list",
+            "message": "Please select one option:",
+            "choices": ["Add a new Task", "Update Task status", "Remove a Task", "Edit a Task",
+                        "Save the list", "Load a list", "Start a new list" , "Stop the program"]
+        }
+    ]
+    result = prompt(options)
+    choice = result[0]
+    optionsList = options[0]["choices"]
+    return (optionsList.index(choice) + 1)
 
 def statusType(taskDict):
     if emptyDict(taskDict) == True:
-        print("Select the number of the wanted status:")
-        print("1- Work in progress")
-        print("2- Pending")
-        print("3- Done")
-        while True:
-            a = input(":  ")
-            try:
-                intA = int(a)
-                if intA in [1,2,3]:
-                    match intA:
-                        case 1:
-                            return "Work in progress"
-                        case 2:
-                            return "Pending"
-                        case 3:
-                            return "Done"
-                else:
-                    print("Please, type an valid status number")
-            except ValueError:
-                print("Please, type an number")
+        questions = [
+        {
+            "type": "list",
+            "message": "Please select one option:",
+            "choices": ["Work in progress", "Pending", "Done"]
+        }
+        ]
+        result = prompt(questions)
+        choice = result[0]
+        return (choice)
     
